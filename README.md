@@ -19,7 +19,7 @@ SERVERS=Server1,Server2,Server3
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/go-load-balancer.git
+   git clone https://github.com/omarsoufiane/go-load-balancer.git
    cd go-load-balancer
 
 ## Usage
