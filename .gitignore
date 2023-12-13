@@ -1,0 +1,25 @@
+# Compiled Object files, Static and Dynamic libs (Windows)
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Compiled Object files, Static and Dynamic libs (macOS)
+*.out
+
+# Compiled Object files, Static and Dynamic libs (Linux)
+*.o
+
+# Dependency directories (created by `go mod tidy` and `go get`)
+/bin/
+/pkg/
+/vendor/
+
+# Output of the `go` tool
+*.test
+
+# Ignore environment files (these might contain sensitive information)
+.env
+
+# Ignore any local configuration files you don't want to commit
+config.yaml  # Example filename, replace with your specific configuration file
