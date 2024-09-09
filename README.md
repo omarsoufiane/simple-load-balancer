@@ -43,6 +43,8 @@ The load balancer will be accessible on port 8080 within the Docker container.
 To change the server addresses, modify the .env file and update the SERVERS variable.
 SERVERS=Server1,Server2,Server3
 
+no kubernetes yet
+
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests.
