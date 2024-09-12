@@ -1,3 +1,4 @@
+[![Bounties on BountyHub](https://img.shields.io/badge/Bounties-on%20BountyHub-yellow)]( https://bountyhub.dev?repo=omarsoufiane/simple-load-balancer)
 # Go Load Balancer
 
 This is a simple round-robin load balancer implemented in Go.
