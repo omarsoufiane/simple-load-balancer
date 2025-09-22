@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: load-balancer-config
+  labels:
+    app: simple-load-balancer
+data:
+  servers: "backend-service-1.default.svc.cluster.local:8080,backend-service-2.default.svc.cluster.local:8080,backend-service-3.default.svc.cluster.local:8080"

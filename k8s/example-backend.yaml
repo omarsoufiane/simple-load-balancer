@@ -1,0 +1,185 @@
+# Example backend services for testing the load balancer
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-service-1
+  labels:
+    app: backend-service-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-service-1
+  template:
+    metadata:
+      labels:
+        app: backend-service-1
+    spec:
+      containers:
+      - name: backend
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        env:
+        - name: SERVER_NAME
+          value: "Backend-Server-1"
+        volumeMounts:
+        - name: config
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: config
+        configMap:
+          name: backend-1-config
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-1-config
+data:
+  index.html: |
+    <html>
+    <body>
+    <h1>Backend Server 1</h1>
+    <p>This is backend server 1 responding to your request.</p>
+    </body>
+    </html>
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-1
+  labels:
+    app: backend-service-1
+spec:
+  ports:
+  - port: 8080
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: backend-service-1
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-service-2
+  labels:
+    app: backend-service-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-service-2
+  template:
+    metadata:
+      labels:
+        app: backend-service-2
+    spec:
+      containers:
+      - name: backend
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        env:
+        - name: SERVER_NAME
+          value: "Backend-Server-2"
+        volumeMounts:
+        - name: config
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: config
+        configMap:
+          name: backend-2-config
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-2-config
+data:
+  index.html: |
+    <html>
+    <body>
+    <h1>Backend Server 2</h1>
+    <p>This is backend server 2 responding to your request.</p>
+    </body>
+    </html>
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-2
+  labels:
+    app: backend-service-2
+spec:
+  ports:
+  - port: 8080
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: backend-service-2
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-service-3
+  labels:
+    app: backend-service-3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-service-3
+  template:
+    metadata:
+      labels:
+        app: backend-service-3
+    spec:
+      containers:
+      - name: backend
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        env:
+        - name: SERVER_NAME
+          value: "Backend-Server-3"
+        volumeMounts:
+        - name: config
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: config
+        configMap:
+          name: backend-3-config
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-3-config
+data:
+  index.html: |
+    <html>
+    <body>
+    <h1>Backend Server 3</h1>
+    <p>This is backend server 3 responding to your request.</p>
+    </body>
+    </html>
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-3
+  labels:
+    app: backend-service-3
+spec:
+  ports:
+  - port: 8080
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: backend-service-3

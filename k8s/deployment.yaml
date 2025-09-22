@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-load-balancer
+  labels:
+    app: simple-load-balancer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-load-balancer
+  template:
+    metadata:
+      labels:
+        app: simple-load-balancer
+    spec:
+      containers:
+      - name: load-balancer
+        image: simple-load-balancer:latest
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: SERVERS
+          valueFrom:
+            configMapKeyRef:
+              name: load-balancer-config
+              key: servers
+        - name: PORT
+          value: "8080"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
